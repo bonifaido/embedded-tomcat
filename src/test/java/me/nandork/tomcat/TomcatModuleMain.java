@@ -1,3 +1,5 @@
+package me.nandork.tomcat;
+
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -9,8 +11,6 @@ import com.google.inject.servlet.SessionScoped;
 import freemarker.ext.servlet.FreemarkerServlet;
 import freemarker.template.Template;
 import freemarker.template.TemplateModel;
-import me.nandork.tomcat.TomcatService;
-import me.nandork.tomcat.guice.TomcatModule;
 import org.apache.catalina.manager.JMXProxyServlet;
 
 import javax.management.remote.JMXPrincipal;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 
-public class SimpleMain {
+public class TomcatModuleMain {
     public static void main(String[] args) throws Exception {
         Injector injector = Guice.createInjector(new TomcatModule(), new ServletModule() {
             @Override

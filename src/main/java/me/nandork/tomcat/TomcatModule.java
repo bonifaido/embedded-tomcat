@@ -1,11 +1,9 @@
-package me.nandork.tomcat.guice;
+package me.nandork.tomcat;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Injector;
+import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.inject.servlet.GuiceFilter;
-import me.nandork.tomcat.TomcatService;
 import org.apache.catalina.Context;
 import org.apache.catalina.servlets.DefaultServlet;
 import org.apache.catalina.startup.Tomcat;
@@ -18,11 +16,12 @@ import javax.servlet.ServletException;
  * TODO add configuration
  * TODO make ProtocolHandlers configurable
  */
-public class TomcatModule extends AbstractModule {
+public class TomcatModule extends PrivateModule {
 
     @Override
     protected void configure() {
         bind(TomcatService.class).in(Singleton.class);
+        expose(TomcatService.class);
     }
 
     /**
@@ -33,7 +32,7 @@ public class TomcatModule extends AbstractModule {
      */
     @Provides
     @Singleton
-    Tomcat provideTomcat(final Injector injector) throws ServletException {
+    Tomcat provideTomcat() throws ServletException {
         Tomcat tomcat = new Tomcat();
 
         String appBase = ".";
